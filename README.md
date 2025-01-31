@@ -38,15 +38,15 @@ $ <b>sudo unzip -d /var/lib/libvirt/images FGT_VM64_KVM-v7.2.0.F-build1157-FORTI
 > Ubuntu 18.04
 
 <pre>
-$ <b>sudo chown libvirt-qemu:kvm /var/lib/libvirt/images/fortios.qcow2</b>
-$ <b>sudo chmod u+x /var/lib/libvirt/images/fortios.qcow2</b>
+$ <b>sudo chown libvirt-qemu:kvm /var/lib/libvirt/images/fortios-7.0.14.qcow2</b>
+$ <b>sudo chmod u+x /var/lib/libvirt/images/fortios-7.0.14.qcow2</b>
 </pre>
 
 > Arch Linux
 
 <pre>
-$ <b>sudo chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/fortios.qcow2</b>
-$ <b>sudo chmod u+x /var/lib/libvirt/images/fortios.qcow2</b>
+$ <b>sudo chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/fortios-7.0.14.qcow2</b>
+$ <b>sudo chmod u+x /var/lib/libvirt/images/fortios-7.0.14.qcow2</b>
 </pre>
 
 4\. Create the `boxes` directory.
