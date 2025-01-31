@@ -36,7 +36,7 @@ source "qemu" "fortigate" {
   format            = "qcow2"
   net_device        = "virtio-net"
   iso_checksum      = "none"
-  iso_url           = "/var/lib/libvirt/images/fortios.qcow2"
+  iso_url           = "/var/lib/libvirt/images/fortios-7.0.14.qcow2"
   boot_wait         = "${var.boot_time}"
   boot_key_interval = "${var.boot_key_interval}"
   boot_command = [
