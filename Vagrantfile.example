@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "fortigate1" do |node|
+    node.vm.guest = :freebsd
+    node.vm.box = "fortinet-fortigate"
+    node.vm.box_version = "7.0.14"
+    node.vm.provider :libvirt do |libvirt|
+      # port1 (mgmt)
+      libvirt.management_network_name = 'default'
+      libvirt.management_network_address = '192.168.0.0/24'
+      libvirt.management_network_mac = '52:54:00:00:01:04'
+      libvirt.management_network_keep = true
+      libvirt.cpus = 1
+      libvirt.memory = 1024 
+    end
+
+    # port2
+    node.vm.network "public_network", 
+      bridge: "virbr2",
+      type: "bridge",
+      dev: "virbr2",
+      auto_config: false
+
+    # port3
+    node.vm.network :private_network,
+      libvirt__tunnel_type: "udp",
+      libvirt__tunnel_local_ip: "127.1.1.1",
+      libvirt__tunnel_local_port: "10001",
+      libvirt__tunnel_ip: "127.1.1.2",
+      libvirt__tunnel_port: "10001",
+      libvirt__iface_name: "port3",
+      auto_config: false
+
+    node.ssh.username = "admin"
+    node.ssh.password = "admin"
+    # node.vm.provision "ansible" do |ansible|
+    #   ansible.compatibility_mode = "2.0"
+    #   ansible.playbook = "./playbooks/fortigate_vm_prov.yml"
+    #   ansible.inventory_path = "./inventory.ini"
+    #   ansible.verbose = true
+    # end
+  end
+end

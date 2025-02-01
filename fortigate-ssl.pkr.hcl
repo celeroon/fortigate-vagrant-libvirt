@@ -1,3 +1,16 @@
+packer {
+  required_plugins {
+    vagrant = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/vagrant"
+    }
+    qemu = {
+      version = ">= 1.1.0"
+      source  = "github.com/hashicorp/qemu"
+    }
+  }
+}
+
 variable "version" {
   type    = string
   default = "unknown"
@@ -18,6 +31,15 @@ variable "boot_key_interval" {
   default = "50ms"
 }
 
+variable "image_name" {
+  type    = string
+  default = "cisco-catalyst-8kv"
+}
+
+variable "image_path" {
+  default = "/var/lib/libvirt/images"
+}
+
 variable "out_dir" {
   type    = string
   default = "tmp_out"
@@ -36,9 +58,13 @@ source "qemu" "fortigate" {
   format            = "qcow2"
   net_device        = "virtio-net"
   iso_checksum      = "none"
-  iso_url           = "/var/lib/libvirt/images/fortios-7.0.14.qcow2"
+  iso_url           = "${var.image_path}/${var.image_name}"
   boot_wait         = "${var.boot_time}"
   boot_key_interval = "${var.boot_key_interval}"
+  headless         = "${var.gui_disabled}"
+  communicator     = "none"
+  vm_name          = "fgt-${var.version}"
+  output_directory = "${var.out_dir}"
   boot_command = [
     "admin<enter><wait>",
     "<enter><wait>",
@@ -97,10 +123,6 @@ source "qemu" "fortigate" {
     "execute shutdown<enter><wait>",
     "y<enter><wait>"
   ]
-  headless         = "${var.gui_disabled}"
-  communicator     = "none"
-  vm_name          = "fgt-${var.version}"
-  output_directory = "${var.out_dir}"
 }
 
 build {
