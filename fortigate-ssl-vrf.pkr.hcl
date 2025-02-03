@@ -120,6 +120,9 @@ source "qemu" "fortigate" {
     "config system global<enter><wait>",
     "set admin-server-cert \"self-signed-cert-lab\"<enter><wait>",
     "end<enter><wait>",
+    "config system settings<enter><wait>",
+    "set gui-multiple-interface-policy enable<enter><wait>",
+    "end<enter><wait>",
     # Shutdown command
     "execute shutdown<enter><wait>",
     "y<enter><wait>"
