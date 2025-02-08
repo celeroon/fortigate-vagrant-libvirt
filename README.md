@@ -50,13 +50,13 @@ cd fortigate-vagrant-libvirt
 6\. Packer _build_ to create the Vagrant box artifact. Supply the FortiOS version number for the `version` variable value and `image name`.
 
 ```
-packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortigate-ssl.pkr.hcl
+packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortigate-ssl-vrf.pkr.hcl
 ```
 
 If you encounter issues, run with debug logging enabled:
 
 ```bash
-PACKER_LOG=1 packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortigate-ssl.pkr.hcl
+PACKER_LOG=1 packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortigate-ssl-vrf.pkr.hcl
 ```
 
 7\. Move the Vagrant box artifact to the `/var/lib/libvirt/images` directory.
