@@ -33,7 +33,7 @@ variable "boot_key_interval" {
 
 variable "image_name" {
   type    = string
-  default = "cisco-catalyst-8kv"
+  default = "fortios"
 }
 
 variable "image_path" {
