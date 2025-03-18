@@ -56,7 +56,7 @@ packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortig
 If you encounter issues, run with debug logging enabled:
 
 ```bash
-PACKER_LOG=1 packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" fortigate-ssl-vrf.pkr.hcl
+PACKER_LOG=1 packer build -var "version=7.0.14" -var "image_name=fortios-7.0.14.qcow2" -var "gui_disabled=false" fortigate-ssl-vrf.pkr.hcl
 ```
 
 7\. Move the Vagrant box artifact to the `/var/lib/libvirt/images` directory.
