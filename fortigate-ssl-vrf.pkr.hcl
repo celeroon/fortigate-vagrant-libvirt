@@ -48,7 +48,7 @@ variable "out_dir" {
 source "qemu" "fortigate" {
   accelerator       = "kvm"
   cpus              = 1
-  memory            = 1024
+  memory            = 2048
   skip_resize_disk  = true
   skip_compaction   = true
   disk_image        = true
@@ -69,7 +69,7 @@ source "qemu" "fortigate" {
     "admin<enter><wait>",
     "<enter><wait>",
     "admin<enter><wait>",
-    "admin<enter><wait>",
+    "admin<enter><wait10s>",
     "config system admin<enter><wait>",
     "edit vagrant<enter><wait>",
     "set accprofile super_admin<enter><wait>",
