@@ -41,6 +41,15 @@ variable "out_dir" {
   default = "tmp_out"
 }
 
+variable "vm_uuid" {
+  type    = string
+  default = "" # empty -> a random UUID is generated per build (see locals below)
+}
+
+locals {
+  vm_uuid = var.vm_uuid != "" ? var.vm_uuid : uuidv4()
+}
+
 source "qemu" "fortigate" {
   accelerator       = "kvm"
   cpus              = 1
@@ -57,10 +66,13 @@ source "qemu" "fortigate" {
   iso_url           = "${var.image_path}/${var.image_name}"
   boot_wait         = "${var.boot_time}"
   boot_key_interval = "${var.boot_key_interval}"
-  headless         = "${var.gui_disabled}"
-  communicator     = "none"
-  vm_name          = "fortigate-${var.version}.qcow2" 
-  output_directory = "${var.out_dir}"
+  headless          = "${var.gui_disabled}"
+  communicator      = "none"
+  vm_name           = "fortigate-${var.version}.qcow2"
+  output_directory  = "${var.out_dir}"
+  qemuargs = [
+    ["-uuid", local.vm_uuid],
+  ]
   boot_command = [
     "admin<enter><wait>",
     "<enter><wait>",
