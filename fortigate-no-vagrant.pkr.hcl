@@ -133,7 +133,7 @@ source "qemu" "fortigate" {
     "set gui-multiple-interface-policy enable<enter><wait>",
     "end<enter><wait>",
     # Shutdown command
-    "execute shutdown<enter><wait>",
+    "execute shutdown<enter><wait5s>",
     "y<enter><wait>"
   ]
 }
