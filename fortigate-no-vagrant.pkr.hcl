@@ -19,12 +19,12 @@ variable "gui_disabled" {
 
 variable "boot_time" {
   type    = string
-  default = "1m"
+  default = "2m"
 }
 
 variable "boot_key_interval" {
   type    = string
-  default = "50ms"
+  default = "75ms"
 }
 
 variable "image_name" {
@@ -70,6 +70,7 @@ source "qemu" "fortigate" {
   communicator      = "none"
   vm_name           = "fortigate-${var.version}.qcow2"
   output_directory  = "${var.out_dir}"
+  shutdown_timeout  = "15m"
   qemuargs = [
     ["-uuid", local.vm_uuid],
   ]
